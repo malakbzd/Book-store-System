@@ -1,0 +1,108 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+:root{
+    --green: #27ae60;
+    --dark-color: #219150;
+    --black: #444;
+    --light-color: #666;
+    --border: .1rem solid rgba(0,0,0,.1);
+    --border-hover: .1rem solid var(--black);
+    --box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+
+}
+*{
+  font-family: "Lobster Two";
+  font-weight: 800;
+  font-style: italic;
+}
+
+
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden ;
+    scroll-padding-top: 5rem ;
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar{
+    width: 2rem;
+}
+
+html::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+html::-webkit-scrollbar-thumb{
+    background: var(--black);
+}
+
+.header .header-1{
+    background: #fff;
+    padding: 1.5rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .header-1 .logo {
+    font-size: 3.5rem;
+    font-weight: bolder;
+    color: rgb(99, 65, 4);
+    text-decoration: none; /* ✅ removes underline */
+}
+
+
+.header .header-1 .logo i{
+    color:goldenrod;
+
+}
+
+.header .header-1 .search-form {
+    width: 50rem;
+    height: 5rem;
+    border: var(--border);
+    background: #fff;
+    display: flex;
+    align-items: center;
+    border-radius: .5rem;
+    position: relative; /* added */
+}
+
+.header .header-1 .search-form input {
+    font-size: 1.6rem;
+    padding: 0 4rem 0 1.2rem; /* add right padding for icon space */
+    height: 100%;
+    width: 100%;
+    color: var(--black);
+    border: none;
+    outline: none;
+}
+
+.header .header-1 .search-form label {
+    position: absolute; /* added */
+    right: 1.2rem; /* move inside box */
+    font-size: 2rem;
+    color: var(--black);
+    cursor: pointer;
+}
+
+.header .header-1 .search-form label:hover {
+    color: goldenrod;
+}
+
+.header .header-1 .icons div,
+.header .header-1 .icons a{
+    font-size: 2.5rem;
+    margin-left: 1.5rem;
+    color: rgb(99, 65, 4);
+    cursor: pointer;
+}
+
+.header .header-1 .icons div:hover,
+.header .header-1 .icons a:hover{
+    color: goldenrod;
+}
