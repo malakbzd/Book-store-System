@@ -1,9 +1,6 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-
-:root{
+:root {
     --green: #27ae60;
     --dark-color: #219150;
     --black: #444;
@@ -11,56 +8,66 @@
     --border: .1rem solid rgba(0,0,0,.1);
     --border-hover: .1rem solid var(--black);
     --box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
-
 }
-*{
-  font-family: "Lobster Two";
+
+* {
+  font-family: "Lobster Two", cursive;
   font-weight: 800;
   font-style: italic;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-
-html{
+html {
     font-size: 62.5%;
-    overflow-x: hidden ;
-    scroll-padding-top: 5rem ;
+    overflow-x: hidden;
+    scroll-padding-top: 5rem;
     scroll-behavior: smooth;
 }
 
-html::-webkit-scrollbar{
-    width: 2rem;
+/* ✅ Custom slim scrollbar */
+html::-webkit-scrollbar {
+    width: 0.7rem; /* thinner */
 }
 
-html::-webkit-scrollbar-track{
+html::-webkit-scrollbar-track {
     background: transparent;
 }
 
-html::-webkit-scrollbar-thumb{
-    background: var(--black);
+html::-webkit-scrollbar-thumb {
+    background: rgb(99, 65, 4);
+    border-radius: 10px;
 }
 
-.header .header-1{
+html::-webkit-scrollbar-thumb:hover {
+    background: goldenrod;
+}
+
+/* ✅ HEADER BAR */
+.header .header-1 {
     background: #fff;
-    padding: 1.5rem 9%;
+    padding: 1.5rem 3%; /* smaller padding makes bar longer */
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%; /* full width */
+    box-sizing: border-box;
 }
 
 .header .header-1 .logo {
     font-size: 3.5rem;
     font-weight: bolder;
     color: rgb(99, 65, 4);
-    text-decoration: none; /* ✅ removes underline */
+    text-decoration: none;
 }
 
-
-.header .header-1 .logo i{
-    color:goldenrod;
-
+.header .header-1 .logo i {
+    color: goldenrod;
+    text-decoration: none;
 }
 
+/* ✅ Search bar */
 .header .header-1 .search-form {
     width: 50rem;
     height: 5rem;
@@ -69,12 +76,12 @@ html::-webkit-scrollbar-thumb{
     display: flex;
     align-items: center;
     border-radius: .5rem;
-    position: relative; /* added */
+    position: relative;
 }
 
 .header .header-1 .search-form input {
     font-size: 1.6rem;
-    padding: 0 4rem 0 1.2rem; /* add right padding for icon space */
+    padding: 0 4rem 0 1.2rem;
     height: 100%;
     width: 100%;
     color: var(--black);
@@ -83,10 +90,10 @@ html::-webkit-scrollbar-thumb{
 }
 
 .header .header-1 .search-form label {
-    position: absolute; /* added */
-    right: 1.2rem; /* move inside box */
+    position: absolute;
+    right: 1.2rem;
     font-size: 2rem;
-    color: var(--black);
+    color: rgb(99, 65, 4);
     cursor: pointer;
 }
 
@@ -94,15 +101,54 @@ html::-webkit-scrollbar-thumb{
     color: goldenrod;
 }
 
+/* ✅ Header icons */
 .header .header-1 .icons div,
-.header .header-1 .icons a{
+.header .header-1 .icons a {
     font-size: 2.5rem;
     margin-left: 1.5rem;
     color: rgb(99, 65, 4);
     cursor: pointer;
+    text-decoration: none; /* removes underline */
 }
 
 .header .header-1 .icons div:hover,
-.header .header-1 .icons a:hover{
+.header .header-1 .icons a:hover {
     color: goldenrod;
+}
+
+#search-btn {
+    display: none;
+}
+
+/* ✅ Second bar */
+.header .header-2 {
+    background: rgb(99, 65, 4);
+}
+
+.header .header-2 .navbar {
+    text-align: center;
+}
+
+.header .header-2 .navbar a {
+    color: #fff;
+    display: inline-block;
+    padding: 1.3rem;
+    font-size: 2rem;
+    text-decoration: none;
+}
+
+.header .header-2 .navbar a:hover {
+     color: goldenrod;
+    text-decoration: none;
+}
+
+.header .header-2.active{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+}
+
+body {
+    height: 400rem;
+
 }
