@@ -67,13 +67,15 @@ html::-webkit-scrollbar-thumb:hover {
 .header .header-1 .search-form {
     width: 50rem;
     height: 5rem;
-    border: var(--border);
+    border: 2px solid rgb(99, 65, 4); /* ✅ Bolder, matches your theme */
     background: #fff;
     display: flex;
     align-items: center;
     border-radius: .5rem;
     position: relative;
+    transition: border-color 0.3s;
 }
+
 .header .header-1 .search-form input {
     font-size: 1.6rem;
     padding: 0 4rem 0 1.2rem;
@@ -133,6 +135,7 @@ html::-webkit-scrollbar-thumb:hover {
     padding: 1.3rem;
     font-size: 2rem;
     text-decoration: none;
+     margin: 0 1.5rem; /* ✅ Adds space between links */
 }
 .header .header-2 .navbar a:hover {
      color: goldenrod;
@@ -195,22 +198,19 @@ body {
 }
 
 .home {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5rem 10%;
-  background: #fffdf5;
+  padding: 8rem 10%;
+  min-height: 100vh;
+  overflow: hidden;
+  color: #fff;
 }
 
-.home .row {
-  display: flex;
-  align-items: center;
-  gap: 5rem;
-  flex-wrap: wrap;
-}
 
 .home .content {
-  flex: 1 1 40rem;
+  flex: 2 1 40rem;
 }
 
 .home .content h3 {
@@ -220,7 +220,7 @@ body {
 
 .home .content p {
   font-size: 1.8rem;
-  color: #555;
+  color: #351b04;
   margin: 2rem 0;
 }
 
@@ -238,7 +238,102 @@ body {
 }
 
 .book-slider {
-  flex: 1 1 40rem;
+  flex: 2 1 40rem;
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.book-slider img {
+  width: 150px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.book-slider img:hover {
+  transform: scale(1.08);
+}
+
+
+
+
+
+
+
+/* === HOME SECTION WITH BACKGROUND IMAGE === */
+.home {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9rem 10%;
+  min-height: 100vh;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* background image layer */
+.home::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  background: url('carrie-borden-aDD4TENs_Rw-unsplash.jpg') no-repeat center center/cover;
+  filter: blur(5px) brightness(0.6);
+  z-index: -1;
+}
+
+
+/* text + books stay above */
+.home .row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+
+/* text styles */
+.home .content {
+  flex: 1 1 50rem;
+}
+
+.home .content h3 {
+  font-size: 5rem;
+  color: #fff;
+}
+
+.home .content p {
+  font-size: 1.8rem;
+  color: #f1f1f1;
+  margin: 2rem 0;
+}
+
+.home .btn {
+  background: goldenrod;
+  color: #fff;
+  padding: 1rem 3rem;
+  border-radius: .5rem;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.home .btn:hover {
+  background: rgb(99, 65, 4);
+}
+
+/* slider stays the same */
+.book-slider {
+  flex: 2 2 40rem;
   display: flex;
   gap: 1rem;
   overflow-x: auto;
@@ -250,10 +345,71 @@ body {
   height: 220px;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   transition: transform 0.3s ease;
 }
 
 .book-slider img:hover {
   transform: scale(1.08);
+}
+
+
+.book-slider {
+  flex: 1 1 40rem;
+  display: flex;
+  gap: 3rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.book-slider img {
+  width: 250px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+
+
+/* Book Slider Container */
+.book-slider {
+  flex: 1 1 40rem;
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+}
+
+/* Hide scrollbar by default */
+.book-slider::-webkit-scrollbar {
+  height: 8px;                /* scrollbar thickness */
+  background: transparent;    /* invisible background */
+}
+
+/* Show scrollbar only when hovered */
+.book-slider:hover::-webkit-scrollbar {
+  background: rgba(255, 255, 255, 0.1);  /* light background on hover */
+}
+
+/* The scrollbar thumb (the draggable part) */
+.book-slider::-webkit-scrollbar-thumb {
+  background: transparent;    /* hidden by default */
+  border-radius: 10px;
+}
+
+/* Show thumb only on hover */
+.book-slider:hover::-webkit-scrollbar-thumb {
+  background: goldenrod;
+}
+
+/* Optional: Firefox support */
+.book-slider {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.book-slider:hover {
+  scrollbar-color: goldenrod rgba(255,255,255,0.1);
 }
