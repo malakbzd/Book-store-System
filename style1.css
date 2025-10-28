@@ -28,18 +28,15 @@ html {
 
 /* ✅ Custom slim scrollbar */
 html::-webkit-scrollbar {
-    width: 0.7rem; /* thinner */
+    width: 0.7rem;
 }
-
 html::-webkit-scrollbar-track {
     background: transparent;
 }
-
 html::-webkit-scrollbar-thumb {
     background: rgb(99, 65, 4);
     border-radius: 10px;
 }
-
 html::-webkit-scrollbar-thumb:hover {
     background: goldenrod;
 }
@@ -47,11 +44,11 @@ html::-webkit-scrollbar-thumb:hover {
 /* ✅ HEADER BAR */
 .header .header-1 {
     background: #fff;
-    padding: 1.5rem 3%; /* smaller padding makes bar longer */
+    padding: 1.5rem 3%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%; /* full width */
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -64,7 +61,6 @@ html::-webkit-scrollbar-thumb:hover {
 
 .header .header-1 .logo i {
     color: goldenrod;
-    text-decoration: none;
 }
 
 /* ✅ Search bar */
@@ -78,7 +74,6 @@ html::-webkit-scrollbar-thumb:hover {
     border-radius: .5rem;
     position: relative;
 }
-
 .header .header-1 .search-form input {
     font-size: 1.6rem;
     padding: 0 4rem 0 1.2rem;
@@ -88,7 +83,6 @@ html::-webkit-scrollbar-thumb:hover {
     border: none;
     outline: none;
 }
-
 .header .header-1 .search-form label {
     position: absolute;
     right: 1.2rem;
@@ -96,7 +90,6 @@ html::-webkit-scrollbar-thumb:hover {
     color: rgb(99, 65, 4);
     cursor: pointer;
 }
-
 .header .header-1 .search-form label:hover {
     color: goldenrod;
 }
@@ -105,17 +98,24 @@ html::-webkit-scrollbar-thumb:hover {
 .header .header-1 .icons div,
 .header .header-1 .icons a {
     font-size: 2.5rem;
+    margin-left: 2.5rem;
+    color: rgb(99, 65, 4);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.header .header-1 .icons div,
+.header .header-1 .icons a .user-icon {
+    font-size: 2.5rem;
     margin-left: 1.5rem;
     color: rgb(99, 65, 4);
     cursor: pointer;
-    text-decoration: none; /* removes underline */
+    text-decoration: none;
 }
-
 .header .header-1 .icons div:hover,
 .header .header-1 .icons a:hover {
     color: goldenrod;
 }
-
 #search-btn {
     display: none;
 }
@@ -124,11 +124,9 @@ html::-webkit-scrollbar-thumb:hover {
 .header .header-2 {
     background: rgb(99, 65, 4);
 }
-
 .header .header-2 .navbar {
     text-align: center;
 }
-
 .header .header-2 .navbar a {
     color: #fff;
     display: inline-block;
@@ -136,19 +134,126 @@ html::-webkit-scrollbar-thumb:hover {
     font-size: 2rem;
     text-decoration: none;
 }
-
 .header .header-2 .navbar a:hover {
      color: goldenrod;
-    text-decoration: none;
 }
 
-.header .header-2.active{
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
+/* ✅ User Menu Dropdown */
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+.user-menu {
+   margin-right: 1rem;
+}
+
+.user-icon {
+    margin-left: 5.5rem;
+    font-size: 4.5rem;
+    color: rgb(99, 65, 4);
+    cursor: pointer;
+}
+.user-icon:hover {
+    color: goldenrod;
+}
+.user-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 3.5rem;
+    background: #fff;
+    color: rgb(99, 65, 4);
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow);
+    width: 16rem;
+    padding: 1rem;
+    text-align: center;
+    z-index: 100;
+}
+.user-dropdown.active {
+    display: block;
+}
+.user-dropdown p {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+}
+.user-dropdown button {
+    padding: 0.5rem 1rem;
+    font-size: 1.4rem;
+    color: #fff;
+    background: rgb(99, 65, 4);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.user-dropdown button:hover {
+    background: goldenrod;
 }
 
 body {
     height: 400rem;
+}
 
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 10%;
+  background: #fffdf5;
+}
+
+.home .row {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  flex-wrap: wrap;
+}
+
+.home .content {
+  flex: 1 1 40rem;
+}
+
+.home .content h3 {
+  font-size: 4rem;
+  color: rgb(99, 65, 4);
+}
+
+.home .content p {
+  font-size: 1.8rem;
+  color: #555;
+  margin: 2rem 0;
+}
+
+.home .btn {
+  background: goldenrod;
+  color: #fff;
+  padding: 1rem 3rem;
+  border-radius: .5rem;
+  text-decoration: none;
+  font-size: 1.8rem;
+}
+
+.home .btn:hover {
+  background: rgb(99, 65, 4);
+}
+
+.book-slider {
+  flex: 1 1 40rem;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.book-slider img {
+  width: 150px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.book-slider img:hover {
+  transform: scale(1.08);
 }

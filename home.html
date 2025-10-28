@@ -10,21 +10,27 @@
 <body>
     <header class="header">
         <div class="header-1">
-
-            <a href="#" class="logo"> <i class="fas fa-book"></i> Bookaholic</a>
+            <a href="#" class="logo"><i class="fas fa-book"></i> Bookaholic</a>
 
             <form action="" class="search-form">
                 <input type="search" placeholder="search here..." id="search-box">
                 <label for="search-box" class="fas fa-search"></label>
             </form>
-      
+
             <div class="icons">
                 <div id="search-btn" class="fas fa-search"></div>
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-shopping-cart"></a>
-                <div id="login-btn" class="fas fa-user"></div>
+
+                <!-- ✅ User Menu -->
+                <div class="user-menu">
+                    <div class="user-icon"><i class="fas fa-user"></i></div>
+                    <div class="user-dropdown">
+                        <p id="usernameDisplay">Welcome, Guest</p>
+                        <button id="logoutBtn">Logout</button>
+                    </div>
+                </div>
             </div>
-      
         </div>
 
         <div class="header-2">
@@ -35,7 +41,76 @@
                 <a href="#contact">contact</a>
             </nav>
         </div>
+
+       <section class="home" id="home">
+  <div class="row">
+
+    <div class="content">
+      <h3>Up to 75% Off</h3>
+      <p>Discover our collection of bestsellers and new arrivals with amazing discounts!</p>
+      <a href="#" class="btn">Shop Now</a>
+    </div>
+
+    <div class="book-slider">
+      <img src="téléchargement.jpg" alt="Book 1">
+      <img src="images (1).jpg" alt="Book 2">
+      <img src="téléchargement (1).png" alt="Book 3">
+      <img src="images (2).jpg" alt="Book 4">
+      
+    </div>
+
+  </div>
+</section>
+
+
     </header>
+
+    <script>
+        // === Retrieve logged-in username from storage ===
+        const usernameDisplay = document.getElementById('usernameDisplay');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const storedUsername = localStorage.getItem('rememberedUsername') || localStorage.getItem('regUsername');
+
+        if (storedUsername) {
+            usernameDisplay.textContent = `Welcome, ${storedUsername}`;
+        } else {
+            usernameDisplay.textContent = "Welcome, Guest";
+        }
+
+        // === Logout Logic ===
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('rememberedUsername');
+            localStorage.removeItem('regUsername');
+            window.location.href = 'index.html';
+        });
+
+        // === Toggle Dropdown Menu ===
+        const userIcon = document.querySelector('.user-icon');
+        const userDropdown = document.querySelector('.user-dropdown');
+        userIcon.addEventListener('click', () => {
+            userDropdown.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script src="script.js"></script>
 </body>
