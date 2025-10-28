@@ -194,8 +194,10 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 body {
-    height: 400rem;
+  height: 250px;
+  
 }
+
 
 .home {
   position: relative;
@@ -283,7 +285,7 @@ body {
   top: -10px;
   left: -10px;
   width: calc(100% + 20px);
-  height: calc(100% + 20px);
+  height: calc(90% + 20px);
   background: url('carrie-borden-aDD4TENs_Rw-unsplash.jpg') no-repeat center center/cover;
   filter: blur(5px) brightness(0.6);
   z-index: -1;
@@ -412,4 +414,42 @@ body {
 }
 .book-slider:hover {
   scrollbar-color: goldenrod rgba(255,255,255,0.1);
+}
+
+.icons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    justify-content: center;  /* centers the whole grid */
+    align-items: center;      /* centers vertically if needed */
+    text-align: center;       /* centers text and icons inside each block */
+    gap: 2rem;                /* optional: adds space between icon boxes */
+    padding: 2rem 0;
+}
+
+
+.icons-container .icons {
+    display: flex;
+    flex-direction: column; /* stack icon, title, and text vertically */
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 0;
+}
+
+
+.icons-container .icons i{
+    font-size: 3.5rem;
+    color: goldenrod;
+}
+
+.icons-container .icons h3{
+    font-size: 2.2rem;
+    color: black;
+    padding-bottom: .5rem;
+}
+
+.icons-container .icons p{
+    font-size: 1.5rem;
+    color: var(--light-color);
+   
 }
