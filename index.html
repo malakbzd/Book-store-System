@@ -1,144 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login | Bookaholic</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 </head>
+
 <body>
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-1">
+      <a href="#" class="logo"><i class="fas fa-book"></i></a>
+    </div>
+  </header>
 
-    <header class="header">
-        <div class="header-1">
-
-            <a href="#" class="logo"> <i class="fas fa-book"></i> </a>
-      
-        </div>
-
+  <!-- ===== WRAPPER ===== -->
   <div class="wrapper">
-    <!-- LOGIN FORM -->
+    <!-- ================= LOGIN FORM ================= -->
     <form id="loginForm" class="form active">
-      <h1>Bookaholic
-        Login
-      </h1>
+      <h1>Bookaholic Login</h1>
 
       <div class="input-box">
-        <input type="text" id="loginUsername" placeholder="Username" required>
+        <input type="text" id="loginUsername" placeholder="Username" required />
         <i class="fas fa-user-alt"></i>
       </div>
 
       <div class="input-box">
-        <input type="password" id="loginPassword" placeholder="Password" required>
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Password"
+          required
+        />
         <i class="fa fa-lock"></i>
       </div>
 
       <div class="remember-forgot">
-        <label><input type="checkbox" id="rememberMe"> Remember me</label>
+        <label><input type="checkbox" id="rememberMe" /> Remember me</label>
       </div>
 
       <button type="submit" class="btn">Login</button>
 
       <div class="register-link">
-        <p>Don’t have an account? <a href="#" id="showRegister">Register</a></p>
+        <p>
+          Don’t have an account?
+          <a href="#" id="showRegister">Register</a>
+        </p>
       </div>
     </form>
 
-    <!-- REGISTER FORM -->
+    <!-- ================= REGISTER FORM ================= -->
     <form id="registerForm" class="form">
       <h1>Bookaholic Register</h1>
 
       <div class="input-box">
-        <input type="text" id="regUsername" placeholder="Username" required>
+        <input type="text" id="regUsername" placeholder="Username" required />
         <i class="fas fa-user-alt"></i>
       </div>
 
       <div class="input-box">
-        <input type="email" id="regEmail" placeholder="Email" required>
+        <input type="email" id="regEmail" placeholder="Email" required />
         <i class="fa fa-envelope"></i>
       </div>
 
       <div class="input-box">
-        <input type="password" id="regPassword" placeholder="Password" required>
+        <input
+          type="password"
+          id="regPassword"
+          placeholder="Password"
+          required
+        />
         <i class="fa fa-lock"></i>
       </div>
 
       <button type="submit" class="btn">Register</button>
 
       <div class="register-link">
-        <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+        <p>
+          Already have an account?
+          <a href="#" id="showLogin">Login</a>
+        </p>
       </div>
     </form>
   </div>
 
+  <!-- ================= SCRIPT SECTION ================= -->
   <script>
-    // ===== LOGIN LOGIC =====
-    const loginForm = document.getElementById('loginForm');
-    const loginUsername = document.getElementById('loginUsername');
-    const loginPassword = document.getElementById('loginPassword');
-    const rememberMe = document.getElementById('rememberMe');
+    // --- Elements ---
+    const loginForm = document.getElementById("loginForm");
+    const loginUsername = document.getElementById("loginUsername");
+    const loginPassword = document.getElementById("loginPassword");
+    const rememberMe = document.getElementById("rememberMe");
 
-    // Load saved username if remembered
+    const registerForm = document.getElementById("registerForm");
+    const regUsername = document.getElementById("regUsername");
+    const regEmail = document.getElementById("regEmail");
+    const regPassword = document.getElementById("regPassword");
+
+    // --- Load saved username if "Remember Me" was checked ---
     window.onload = () => {
-      const savedUsername = localStorage.getItem('rememberedUsername');
+      const savedUsername = localStorage.getItem("rememberedUsername");
       if (savedUsername) {
         loginUsername.value = savedUsername;
         rememberMe.checked = true;
       }
     };
 
-    loginForm.addEventListener('submit', (e) => {
+    // --- LOGIN LOGIC ---
+    loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (loginUsername.value.trim() === '' || loginPassword.value.trim() === '') {
-        alert('Please fill in both username and password.');
+
+      const username = loginUsername.value.trim();
+      const password = loginPassword.value.trim();
+
+      if (username === "" || password === "") {
+        alert("Please fill in both username and password.");
         return;
       }
 
+      // ✅ ADMIN LOGIN CHECK
+      if (username === "admin" && password === "12345") {
+        alert("Welcome, Admin!");
+        window.location.href = "admin.html";
+        return;
+      }
+
+      // ✅ USER LOGIN CHECK
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const user = users.find(
+        (u) => u.username === username && u.password === password
+      );
+
+      if (!user) {
+        alert("Invalid username or password. Please register first.");
+        return;
+      }
+
+      // ✅ Save remembered username
       if (rememberMe.checked) {
-        localStorage.setItem('rememberedUsername', loginUsername.value);
+        localStorage.setItem("rememberedUsername", username);
       } else {
-        localStorage.removeItem('rememberedUsername');
+        localStorage.removeItem("rememberedUsername");
       }
 
-      window.location.href = 'home.html';
+      alert(`Welcome back, ${username}! Redirecting...`);
+      window.location.href = "home.html";
     });
 
-    // ===== SWITCH BETWEEN FORMS =====
-    const showRegister = document.getElementById('showRegister');
-    const showLogin = document.getElementById('showLogin');
-    const registerForm = document.getElementById('registerForm');
-
-    showRegister.addEventListener('click', () => {
-      loginForm.classList.remove('active');
-      registerForm.classList.add('active');
-    });
-
-    showLogin.addEventListener('click', () => {
-      registerForm.classList.remove('active');
-      loginForm.classList.add('active');
-    });
-
-    // ===== REGISTER LOGIC =====
-    const regForm = document.getElementById('registerForm');
-    const regUsername = document.getElementById('regUsername');
-    const regEmail = document.getElementById('regEmail');
-    const regPassword = document.getElementById('regPassword');
-
-    regForm.addEventListener('submit', (e) => {
+    // --- REGISTER LOGIC ---
+    registerForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      if (
-        regUsername.value.trim() === '' ||
-        regEmail.value.trim() === '' ||
-        regPassword.value.trim() === ''
-      ) {
-        alert('Please fill in all fields to register.');
+      const username = regUsername.value.trim();
+      const email = regEmail.value.trim();
+      const password = regPassword.value.trim();
+
+      if (username === "" || email === "" || password === "") {
+        alert("Please fill in all fields to register.");
         return;
       }
 
-      // Simulate registration success
-      alert('Registration successful! Redirecting...');
-      window.location.href = 'home.html';
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Check for duplicate username
+      const existingUser = users.find((u) => u.username === username);
+      if (existingUser) {
+        alert("Username already taken. Please choose another one.");
+        return;
+      }
+
+      // Save new user
+      users.push({ username, email, password });
+      localStorage.setItem("users", JSON.stringify(users));
+
+      alert("Registration successful! You can now log in.");
+
+      // Reset form and switch to login
+      regUsername.value = "";
+      regEmail.value = "";
+      regPassword.value = "";
+      registerForm.classList.remove("active");
+      loginForm.classList.add("active");
+    });
+
+    // --- SWITCH BETWEEN FORMS ---
+    const showRegister = document.getElementById("showRegister");
+    const showLogin = document.getElementById("showLogin");
+
+    showRegister.addEventListener("click", () => {
+      loginForm.classList.remove("active");
+      registerForm.classList.add("active");
+    });
+
+    showLogin.addEventListener("click", () => {
+      registerForm.classList.remove("active");
+      loginForm.classList.add("active");
     });
   </script>
 </body>
