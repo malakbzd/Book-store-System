@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookaholic - My Wishlist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        :root {
+            --primary-brown: #8B4513;
+            --light-brown: #A67B5B;
+            --dark-brown: #5D4037;
+            --cream: #F5F5DC;
+            --light-cream: #FFF8E1;
+            --text-dark: #3E2723;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            font-family: "Lobster Two", cursive;
+            font-weight: 800;
+            font-style: italic;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-brown), var(--dark-brown));
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .wishlist-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .wishlist-header h1 {
+            font-size: 3rem;
+            color: var(--dark-brown);
+            margin-bottom: 1rem;
+        }
+
+        .wishlist-header p {
+            font-size: 1.6rem;
+            color: var(--light-brown);
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .wishlist-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, border 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--light-brown);
+        }
+
+        .wishlist-item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .wishlist-item-content {
+            padding: 1.5rem;
+        }
+
+        .wishlist-item-title {
+            font-size: 1.8rem;
+            color: var(--dark-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .wishlist-item-author {
+            font-size: 1.4rem;
+            color: var(--light-brown);
+            margin-bottom: 1rem;
+        }
+
+        .wishlist-item-price {
+            font-size: 1.8rem;
+            color: var(--primary-brown);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .wishlist-item-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1.4rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-brown);
+            color: white;
+            flex: 2;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-brown);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #e74c3c;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 4rem 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .empty-wishlist i {
+            font-size: 6rem;
+            color: var(--light-brown);
+            margin-bottom: 2rem;
+        }
+
+        .empty-wishlist h3 {
+            font-size: 2.4rem;
+            color: var(--dark-brown);
+            margin-bottom: 1rem;
+        }
+
+        .empty-wishlist p {
+            font-size: 1.6rem;
+            color: var(--light-brown);
+            margin-bottom: 2rem;
+        }
+
+        .continue-shopping {
+            background: var(--primary-brown);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.6rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .continue-shopping:hover {
+            background: var(--dark-brown);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--dark-brown);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-family: Arial, sans-serif;
+            font-size: 1.4rem;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .wishlist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .wishlist-item-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><i class="fas fa-book"></i> <span>Bookaholic</span></div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="home.html#featured">Featured</a></li>
+                <li><a href="#" class="active">Wishlist</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="wishlist-header">
+            <h1><i class="fas fa-heart"></i> My Wishlist</h1>
+            <p>Your favorite books waiting to be purchased</p>
+        </div>
+
+        <div class="wishlist-grid" id="wishlist-items">
+            <!-- Wishlist items will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Bookaholic. All rights reserved.</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function loadWishlistItems() {
+            const wishlistContainer = document.getElementById('wishlist-items');
+
+            if (wishlist.length === 0) {
+                wishlistContainer.innerHTML = `
+                    <div class="empty-wishlist">
+                        <i class="fas fa-heart"></i>
+                        <h3>Your wishlist is empty</h3>
+                        <p>Add some books to your wishlist to see them here</p>
+                        <a href="home.html" class="continue-shopping">Continue Shopping</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+
+            wishlist.forEach((item, index) => {
+                html += `
+                    <div class="wishlist-item">
+                        <img src="${item.cover}" alt="${item.title}" class="wishlist-item-image">
+                        <div class="wishlist-item-content">
+                            <h3 class="wishlist-item-title">${item.title}</h3>
+                            <p class="wishlist-item-price">$${item.price.toFixed(2)}</p>
+                            <div class="wishlist-item-actions">
+                                <button class="btn btn-primary add-to-cart-from-wishlist" data-index="${index}">
+                                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                                </button>
+                                <button class="btn btn-secondary remove-from-wishlist" data-index="${index}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            wishlistContainer.innerHTML = html;
+
+            // Add event listeners
+            document.querySelectorAll('.add-to-cart-from-wishlist').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    addToCartFromWishlist(index);
+                });
+            });
+
+            document.querySelectorAll('.remove-from-wishlist').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    removeFromWishlist(index);
+                });
+            });
+        }
+
+        function addToCartFromWishlist(index) {
+            const item = wishlist[index];
+            
+            // Check if item is already in cart
+            const existingItem = cart.find(cartItem => cartItem.id === item.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: item.id,
+                    title: item.title,
+                    price: item.price,
+                    cover: item.cover,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showToast(`${item.title} added to cart!`);
+            
+            // Optionally remove from wishlist after adding to cart
+            // removeFromWishlist(index);
+        }
+
+        function removeFromWishlist(index) {
+            const item = wishlist[index];
+            wishlist.splice(index, 1);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            showToast(`${item.title} removed from wishlist!`);
+            loadWishlistItems();
+            updateWishlistCount();
+        }
+
+        function updateWishlistCount() {
+            // This would update the wishlist count in the header if needed
+            const wishlistCount = document.querySelector('.wishlist-badge');
+            if (wishlistCount) {
+                wishlistCount.textContent = wishlist.length;
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Load wishlist when page loads
+        document.addEventListener('DOMContentLoaded', loadWishlistItems);
+    </script>
+</body>
+</html>

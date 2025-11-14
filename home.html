@@ -4,25 +4,788 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookaholic</title>
-    <link rel="stylesheet" href="style1.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        :root {
+            --green: #27ae60;
+            --dark-color: #219150;
+            --black: #444;
+            --light-color: #666;
+            --border: .1rem solid rgba(0,0,0,.1);
+            --border-hover: .1rem solid var(--black);
+            --box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+        }
+
+        * {
+          font-family: "Lobster Two", cursive;
+          font-weight: 800;
+          font-style: italic;
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+            scroll-padding-top: 5rem;
+            scroll-behavior: smooth;
+        }
+
+        /* ✅ Custom slim scrollbar */
+        html::-webkit-scrollbar {
+            width: 0.7rem;
+        }
+        html::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        html::-webkit-scrollbar-thumb {
+            background: rgb(99, 65, 4);
+            border-radius: 10px;
+        }
+        html::-webkit-scrollbar-thumb:hover {
+            background: goldenrod;
+        }
+
+        /* ✅ HEADER BAR */
+        .header .header-1 {
+            background: #fff;
+            padding: 1.5rem 3%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .header .header-1 .logo {
+            font-size: 3.5rem;
+            font-weight: bolder;
+            color: rgb(99, 65, 4);
+            text-decoration: none;
+        }
+
+        .header .header-1 .logo i {
+            color: goldenrod;
+        }
+
+        /* ✅ Search bar */
+        .header .header-1 .search-form {
+            width: 50rem;
+            height: 5rem;
+            border: 2px solid rgb(99, 65, 4);
+            background: #fff;
+            display: flex;
+            align-items: center;
+            border-radius: .5rem;
+            position: relative;
+            transition: border-color 0.3s;
+        }
+
+        .header .header-1 .search-form input {
+            font-size: 1.6rem;
+            padding: 0 4rem 0 1.2rem;
+            height: 100%;
+            width: 100%;
+            color: var(--black);
+            border: none;
+            outline: none;
+        }
+        .header .header-1 .search-form label {
+            position: absolute;
+            right: 1.2rem;
+            font-size: 2rem;
+            color: rgb(99, 65, 4);
+            cursor: pointer;
+        }
+        .header .header-1 .search-form label:hover {
+            color: goldenrod;
+        }
+
+        /* ✅ Header icons */
+        .header .header-1 .icons div,
+        .header .header-1 .icons a  {
+            font-size: 2.8rem;
+            margin-left: 1.5rem;
+            margin-right: 0.5rem;
+            color: rgb(99, 65, 4);
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+
+        
+
+        .header .header-1 .icons div:hover,
+        .header .header-1 .icons a:hover {
+            color: goldenrod;
+        }
+        
+       /* Cart badge - SMALLER RED CIRCLE */
+ .header .header-1 .icons a .cart-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    line-height: 1;
+    z-index: 10;
+    padding: 0;
+    border: 1px solid white;
+    box-sizing: border-box;
+}
+
+/* Wishlist badge - SMALLER RED CIRCLE */
+ .header .header-1 .icons a .wishlist-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    line-height: 1;
+    z-index: 10;
+    padding: 0;
+    border: 1px solid white;
+    box-sizing: border-box;
+}
+        
+        #search-btn {
+            display: none;
+        }
+
+        /* ✅ Second bar */
+        .header .header-2 {
+            background: rgb(99, 65, 4);
+        }
+        .header .header-2 .navbar {
+            text-align: center;
+        }
+        .header .header-2 .navbar a {
+            color: #fff;
+            display: inline-block;
+            padding: 1.3rem;
+            font-size: 2rem;
+            text-decoration: none;
+             margin: 0 1.5rem;
+        }
+        .header .header-2 .navbar a:hover {
+             color: goldenrod;
+        }
+
+        /* ✅ User Menu Dropdown */
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-icon {
+            margin-left: 1.5rem;
+            font-size: 2.5rem;
+            color: rgb(99, 65, 4);
+            cursor: pointer;
+        }
+        .user-icon:hover {
+            color: goldenrod;
+        }
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 3.5rem;
+            background: #fff;
+            color: rgb(99, 65, 4);
+            border-radius: 0.5rem;
+            box-shadow: var(--box-shadow);
+            width: 16rem;
+            padding: 1rem;
+            text-align: center;
+            z-index: 100;
+        }
+        .user-dropdown.active {
+            display: block;
+        }
+        .user-dropdown p {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+        .user-dropdown button {
+            padding: 0.5rem 1rem;
+            font-size: 1.4rem;
+            color: #fff;
+            background: rgb(99, 65, 4);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+        .user-dropdown button:hover {
+            background: goldenrod;
+        }
+
+        body {
+          height: 250px;
+        }
+
+        .home {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 8rem 10%;
+          min-height: 100vh;
+          overflow: hidden;
+          color: #fff;
+        }
+
+        .home .content {
+          flex: 2 1 40rem;
+        }
+
+        .home .content h3 {
+          font-size: 4rem;
+          color: rgb(99, 65, 4);
+        }
+
+        .home .content p {
+          font-size: 1.8rem;
+          color: #351b04;
+          margin: 2rem 0;
+        }
+
+        .home .btn {
+          background: goldenrod;
+          color: #fff;
+          padding: 1rem 3rem;
+          border-radius: .5rem;
+          text-decoration: none;
+          font-size: 1.8rem;
+        }
+
+        .home .btn:hover {
+          background: rgb(99, 65, 4);
+        }
+
+        .book-slider {
+          flex: 2 1 40rem;
+          display: flex;
+          gap: 2rem;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+        }
+
+        .book-slider img {
+          width: 15px;
+          height: 240px;
+          object-fit: cover;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          transition: transform 0.3s ease;
+        }
+
+        .book-slider img:hover {
+          transform: scale(1.08);
+        }
+
+        /* === HOME SECTION WITH BACKGROUND IMAGE === */
+        .home {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 9rem 10%;
+          min-height: 100vh;
+          overflow: hidden;
+          color: #fff;
+        }
+
+        /* background image layer */
+        .home::before {
+          content: "";
+          position: absolute;
+          top: -10px;
+          left: -10px;
+          width: calc(100% + 20px);
+          height: calc(90% + 20px);
+          background: url(carrie-borden-aDD4TENs_Rw-unsplash.jpg) no-repeat center center/cover;
+          filter: blur(5px) brightness(0.6);
+          z-index: -1;
+        }
+
+        /* text + books stay above */
+        .home .row {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 5rem;
+          flex-wrap: wrap;
+          z-index: 1;
+        }
+
+        /* text styles */
+        .home .content {
+          flex: 1 1 50rem;
+        }
+
+        .home .content h3 {
+          font-size: 5rem;
+          color: #fff;
+        }
+
+        .home .content p {
+          font-size: 1.8rem;
+          color: #f1f1f1;
+          margin: 2rem 0;
+        }
+
+        .home .btn {
+          background: goldenrod;
+          color: #fff;
+          padding: 1rem 3rem;
+          border-radius: .5rem;
+          text-decoration: none;
+          font-size: 1.8rem;
+          font-weight: bold;
+          transition: background 0.3s;
+        }
+
+        .home .btn:hover {
+          background: rgb(99, 65, 4);
+        }
+
+        /* slider stays the same */
+        .book-slider {
+          flex: 2 2 40rem;
+          display: flex;
+          gap: 1rem;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+        }
+
+        .book-slider img {
+          width: 150px;
+          height: 220px;
+          object-fit: cover;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+          transition: transform 0.3s ease;
+        }
+
+        .book-slider img:hover {
+          transform: scale(1.08);
+        }
+
+        .book-slider {
+          flex: 1 1 40rem;
+          display: flex;
+          gap: 3rem;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+        }
+
+        .book-slider img {
+          width: 250px;
+          height: 220px;
+          object-fit: cover;
+          border-radius: 1rem;
+          box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+          transition: transform 0.3s ease;
+        }
+
+        /* Book Slider Container */
+        .book-slider {
+          flex: 1 1 40rem;
+          display: flex;
+          gap: 2rem;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+          padding-bottom: 1rem;
+        }
+
+        /* Hide scrollbar by default */
+        .book-slider::-webkit-scrollbar {
+          height: 8px;
+          background: transparent;
+        }
+
+        /* Show scrollbar only when hovered */
+        .book-slider:hover::-webkit-scrollbar {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* The scrollbar thumb (the draggable part) */
+        .book-slider::-webkit-scrollbar-thumb {
+          background: transparent;
+          border-radius: 10px;
+        }
+
+        /* Show thumb only on hover */
+        .book-slider:hover::-webkit-scrollbar-thumb {
+          background: goldenrod;
+        }
+
+        /* Optional: Firefox support */
+        .book-slider {
+          scrollbar-width: thin;
+          scrollbar-color: transparent transparent;
+        }
+        .book-slider:hover {
+          scrollbar-color: goldenrod rgba(255,255,255,0.1);
+        }
+
+        .icons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .icons-container .icons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem 0;
+        }
+
+        .icons-container .icons i{
+            font-size: 3.5rem;
+            color: goldenrod;
+        }
+
+        .icons-container .icons h3{
+            font-size: 2.2rem;
+            color: black;
+            padding-bottom: .5rem;
+        }
+
+        .icons-container .icons p{
+            font-size: 1.5rem;
+            color: var(--light-color);
+        }
+
+        .heading{
+          text-align: center;
+          margin-bottom: 2rem;
+          position: relative;
+        }
+
+        .header::before{
+          content: '';
+          position: absolute;
+          top:50%; left: 0;
+          transform: translateY(-50%);
+          width: 100%;
+          height: .01rem;
+          background: rgba(0,0,0,.1);
+          z-index: -1;
+        }
+
+        .header span{
+          font-size: 3rem;
+          padding: 5rem 2rem;
+          color: black;
+          background: #fff;
+          border: var(--border); 
+        }
+
+        .featured .featured-slider .box{
+          width: 25rem;
+          margin: 2rem 0;
+          position: relative;
+          overflow: hidden;
+          border: var(--border);
+          text-align: center;
+        }
+
+        .featured .featured-slider .box:hover{
+          border:var(--border-hover);
+        }
+
+        .featured .featured-slider .box .btn{
+           background: goldenrod;
+          color: #fff;
+          padding: 1rem 3rem;
+          border-radius: .5rem;
+          text-decoration: none;
+          font-size: 1.8rem;
+          font-weight: bold;
+          transition: background 0.3s;
+        }
+
+        .featured .featured-slider .box .btn:hover{
+          background: rgb(99, 65, 4);
+        }
+
+        /* Option 2: Fill space but maintain aspect ratio */
+.featured .featured-slider .box .image img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+#featuredBooksContainer .box .image img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.book-slider img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+        /* REMOVED THE BORDER BOTTOM FROM ICONS */
+        .featured .featured-slider .box .icons{
+          position: absolute;
+          top:0; left: 0; right: 0;
+          background: #fff;
+          z-index: 1;
+          transform: translateY(-100%);
+        }
+
+        .featured .featured-slider .box:hover .icons{
+          transform: translateY(0%);
+        }
+
+        .featured .featured-slider .box .icons a{
+          color: black;
+          font-size: 0.2rem;
+          padding: 1.3rem 1.5rem;
+        }
+         
+        .featured .featured-slider .box .icons a:hover{
+          background:  rgb(99, 65, 4);
+          color: #fff;
+        }
+
+        .featured .featured-slider .box .content{
+          background: #fff;
+          padding: 1.5rem;
+        }
+
+        .featured .featured-slider .box .content h3{
+         font-size: 2rem;
+         color: black;
+        }
+
+        .featured .featured-slider .box .content .price{
+          font-size: 2.2rem;
+          color: black;
+          padding-top: 1rem;
+        }
+
+        .featured .featured-slider .box .content .price span{
+          font-size: 1.5rem;
+          color: var(--light-color);
+          text-decoration: line-through;
+        }
+
+        /* Book Type Badge */
+        .book-type-badge {
+            background: rgb(99, 65, 4);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Search highlight */
+        .search-highlight {
+            background-color: yellow;
+            font-weight: bold;
+            padding: 0.1rem 0.2rem;
+            border-radius: 3px;
+        }
+
+        /* Featured Books Slider Dynamic Support */
+        #featuredBooksContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        #featuredBooksContainer .box {
+            width: 25rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            border: var(--border);
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, border 0.3s;
+        }
+
+        #featuredBooksContainer .box:hover {
+            border: var(--border-hover);
+            transform: translateY(-5px);
+        }
+
+        #featuredBooksContainer .box .image {
+            padding: 1rem;
+            background: linear-gradient(15deg, #eee 30%, #fff 30.1%);
+        }
+
+        #featuredBooksContainer .box .image img {
+            height: 35rem;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        #featuredBooksContainer .box:hover .image img {
+            transform: scale(1.05);
+        }
+
+        /* REMOVED BORDER FROM ICONS HERE TOO */
+        #featuredBooksContainer .box .icons {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            background: #fff;
+            z-index: 1;
+            transform: translateY(-100%);
+            transition: transform 0.3s;
+        }
+
+        #featuredBooksContainer .box:hover .icons {
+            transform: translateY(0%);
+        }
+
+        #featuredBooksContainer .box .icons a {
+            color: black;
+            font-size: 2.2rem;
+            padding: 1.3rem 1.5rem;
+        }
+
+        #featuredBooksContainer .box .icons a:hover {
+            background: rgb(99, 65, 4);
+            color: #fff;
+        }
+
+        #featuredBooksContainer .box .content {
+            background: #fff;
+            padding: 1.5rem;
+        }
+
+        #featuredBooksContainer .box .content h3 {
+            font-size: 2rem;
+            color: black;
+        }
+
+        #featuredBooksContainer .box .content .price {
+            font-size: 2.2rem;
+            color: black;
+            padding-top: 1rem;
+        }
+
+        #featuredBooksContainer .box .content .price span {
+            font-size: 1.5rem;
+            color: var(--light-color);
+            text-decoration: line-through;
+        }
+
+        #featuredBooksContainer .box .btn {
+            background: goldenrod;
+            color: #fff;
+            padding: 1rem 3rem;
+            border-radius: .5rem;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-block;
+            margin-top: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        #featuredBooksContainer .box .btn:hover {
+            background: rgb(99, 65, 4);
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-family: Arial, sans-serif;
+            font-size: 1.4rem;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .wishlist-active {
+            color: #e74c3c !important;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
         <div class="header-1">
             <a href="#" class="logo"><i class="fas fa-book"></i> Bookaholic</a>
 
-            <form action="" class="search-form">
-                <input type="search" placeholder="search here..." id="search-box">
+            <form action="" class="search-form" id="search-form">
+                <input type="search" placeholder="Search books by title, author, or type..." id="search-box">
                 <label for="search-box" class="fas fa-search"></label>
             </form>
 
             <div class="icons">
                 <div id="search-btn" class="fas fa-search"></div>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-shopping-cart"></a>
+                <a href="wishlist.html" class="fas fa-heart" id="wishlist-icon">
+                    <span class="wishlist-badge" id="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="fas fa-shopping-cart" id="cart-icon">
+                    <span class="cart-badge" id="cart-count">0</span>
+                </a>
 
-                <!-- ✅ User Menu -->
+                <!-- User Menu -->
                 <div class="user-menu">
                     <div class="user-icon"><i class="fas fa-user"></i></div>
                     <div class="user-dropdown">
@@ -35,191 +798,87 @@
 
         <div class="header-2">
             <nav class="navbar">
-                <a href="#Home">home</a>
+                <a href="#home">home</a>
                 <a href="#featured">featured</a>
-                <a href="#arrivals">arrivals</a>
-                <a href="#reviews">reviews</a>
-                <a href="#contact">contact</a>
+                <!-- REMOVED ARRIVALS LINK -->
+                <a href="wishlist.html">Wishlist</a>
+                <a href="cart.html">Cart</a>
+                <a href="admin.html">Admin Panel</a>
             </nav>
         </div>
+    </header>
 
-       <section class="home" id="home">
-  <div class="row">
+    <section class="home" id="home">
+        <div class="row">
+            <div class="content">
+                <h3>Up to 75% Off</h3>
+                <p>Discover our collection of bestsellers and new arrivals with amazing discounts!</p>
+                <a href="#featured" class="btn">Shop Now</a>
+            </div>
 
-    <div class="content">
-      <h3>Up to 75% Off</h3>
-      <p>Discover our collection of bestsellers and new arrivals with amazing discounts!</p>
-      <a href="#" class="btn">Shop Now</a>
-    </div>
-
-    <div class="book-slider">
-      <img src="téléchargement.jpg" alt="Book 1">
-      <img src="images (1).jpg" alt="Book 2">
-      <img src="téléchargement (1).png" alt="Book 3">
-      <img src="images (2).jpg" alt="Book 4">
-      
-    </div>
-
-  </div>
-</section>
-
-    <section class="icons-container">
-        <div class="icons">
-            <i class="fas fa-plane"></i>
-                <div class="content">
-                    <h3>free shipping</h3>
-                    <p>order over $100</p>
-                </div>
-        </div>
-
-
-        <div class="icons">
-            <i class="fas fa-lock"></i>
-                <div class="content">
-                    <h3>secure payment</h3>
-                    <p>100 secure pyment</p>
-                </div>
-        </div>
-
-
-        <div class="icons">
-            <i class="fas fa-redo-alt"></i>
-                <div class="content">
-                    <h3>easy returns</h3>
-                    <p>10 days returns</p>
-                </div>
-        </div>
-
-
-        <div class="icons">
-            <i class="fas fa-headset"></i>
-                <div class="content">
-                    <h3>24/7 support</h3>
-                    <p>call us anytime</p>
-                </div>
-        </div>
-
-    </section>
-
-<section class="featured" id="featured">
-        <h1  class="heading"> <span>featured books</span></h1>
-        <div class = "featured-slider">
-            <div class="wrapper" >
-                <div class="box">
-
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" " .alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class = "price" >$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-
-                <div class="box">
-
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" " .alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class = "price" >$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-
-                <div class="box">
-
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" " .alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class = "price" >$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-
-
-                <div class="box">
-
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" " .alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class = "price" >$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-
-                <div class="box">
-
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" " .alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class = "price" >$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-                
+            <div class="book-slider">
+                <img src="https://d1btptoiso7inb.cloudfront.net/RwKtasqODaYODD_KvjoTGfoMei3JETNndYKpzH2TSA8/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDAvMTQ4LzM2NS8z/MWZlMDI4ZWYyZmUx/NTBmLmpwZWc" alt="Book 1">
+                <img src="https://d1btptoiso7inb.cloudfront.net/J43hzWE50BbdJsHw_R-hPOizhXWt8ic2mkLtyMByOPc/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDIvNzk3LzQxOS83/YmE4MDg5NDk1MzMz/NzFiLnBuZw" alt="Book 2">
+                <img src="https://d1btptoiso7inb.cloudfront.net/sP98Ed2oisuKr4F5vEgO4cuNeR-_HzOKtSV1hlpR5P4/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDUvMzU4LzAyMS8z/ZTMyM2I0NTc4YTQx/NTZlLmpwZw" alt="Book 3">
+                <img src="https://d1btptoiso7inb.cloudfront.net/D4blswBWqPxDAXmwlVDnE-1Wl-0oj9B1UcnEnKDUeZo/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDEvODQ4LzU5OS9l/MzJiMWY3ZmY1YzQw/Y2MxLmpwZw" alt="Book 4">
             </div>
         </div>
     </section>
 
+    <section class="icons-container">
+        <div class="icons">
+            <i class="fas fa-plane"></i>
+            <div class="content">
+                <h3>free shipping</h3>
+                <p>order over $100</p>
+            </div>
+        </div>
 
+        <div class="icons">
+            <i class="fas fa-lock"></i>
+            <div class="content">
+                <h3>secure payment</h3>
+                <p>100 secure payment</p>
+            </div>
+        </div>
 
+        <div class="icons">
+            <i class="fas fa-redo-alt"></i>
+            <div class="content">
+                <h3>easy returns</h3>
+                <p>10 days returns</p>
+            </div>
+        </div>
 
+        <div class="icons">
+            <i class="fas fa-headset"></i>
+            <div class="content">
+                <h3>24/7 support</h3>
+                <p>call us anytime</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Featured Section -->
+    <section class="featured" id="featured">
+        <h1 class="heading"><span>featured books</span></h1>
 
+        <!-- ✅ Dynamically Added Featured Books -->
+        <div id="featuredBooksContainer" class="swiper featured-slider">
+            <!-- JS will inject boxes here -->
+        </div>
+    </section>
 
-    </header>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
     <script>
-        // === Retrieve logged-in username from storage ===
+        // === Cart and Wishlist Management ===
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        let allBooks = JSON.parse(localStorage.getItem('books')) || [];
+        
+        // === Retrieve logged-in username ===
         const usernameDisplay = document.getElementById('usernameDisplay');
         const logoutBtn = document.getElementById('logoutBtn');
         const storedUsername = localStorage.getItem('rememberedUsername') || localStorage.getItem('regUsername');
@@ -230,51 +889,206 @@
             usernameDisplay.textContent = "Welcome, Guest";
         }
 
-        // === Logout Logic ===
         logoutBtn.addEventListener('click', () => {
             localStorage.removeItem('rememberedUsername');
             localStorage.removeItem('regUsername');
             window.location.href = 'index.html';
         });
 
-        // === Toggle Dropdown Menu ===
         const userIcon = document.querySelector('.user-icon');
         const userDropdown = document.querySelector('.user-dropdown');
         userIcon.addEventListener('click', () => {
             userDropdown.classList.toggle('active');
         });
+
+        // Update cart and wishlist counts
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+        
+        function updateWishlistCount() {
+            document.getElementById('wishlist-count').textContent = wishlist.length;
+        }
+        
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Add to cart function
+        function addToCart(book) {
+            // Check if book is already in cart
+            const existingItem = cart.find(item => item.id === book.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: book.id,
+                    title: book.title,
+                    price: book.price,
+                    cover: book.cover,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showToast(`${book.title} added to cart!`);
+        }
+        
+        // Toggle wishlist (add/remove)
+        function toggleWishlist(book, heartIcon) {
+            const existingIndex = wishlist.findIndex(item => item.id === book.id);
+            
+            if (existingIndex === -1) {
+                // Add to wishlist
+                wishlist.push({
+                    id: book.id,
+                    title: book.title,
+                    price: book.price,
+                    cover: book.cover
+                });
+                heartIcon.classList.add('wishlist-active');
+                showToast(`${book.title} added to wishlist!`);
+            } else {
+                // Remove from wishlist
+                wishlist.splice(existingIndex, 1);
+                heartIcon.classList.remove('wishlist-active');
+                showToast(`${book.title} removed from wishlist!`);
+            }
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            updateWishlistCount();
+        }
+
+        // Search functionality
+        function performSearch(searchTerm) {
+            const filteredBooks = allBooks.filter(book => 
+                book.title.toLowerCase().includes(searchTerm) ||
+                book.author.toLowerCase().includes(searchTerm) ||
+                book.type.toLowerCase().includes(searchTerm)
+            );
+            loadFeaturedBooks(filteredBooks, searchTerm);
+        }
+
+        // Highlight search terms in text
+        function highlightText(text, searchTerm) {
+            if (!searchTerm) return text;
+            
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            return text.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+
+        // ✅ Dynamically Load Featured Books
+        function loadFeaturedBooks(booksToShow = null, searchTerm = '') {
+            let books = booksToShow || allBooks;
+            let container = document.getElementById("featuredBooksContainer");
+            container.innerHTML = ''; // Clear existing content
+
+            if (books.length === 0) {
+                const noResultsMessage = searchTerm ? 
+                    `<p style="text-align: center; font-size: 2rem; color: #666; padding: 2rem; grid-column: 1/-1;">
+                        No books found for "${searchTerm}". Try a different search term.
+                    </p>` :
+                    `<p style="text-align: center; font-size: 2rem; color: #666; padding: 2rem; grid-column: 1/-1;">
+                        No books available. Add some books in the admin panel!
+                    </p>`;
+                container.innerHTML = noResultsMessage;
+                return;
+            }
+
+            books.forEach(book => {
+                let box = document.createElement("div");
+                box.className = "box";
+                
+                // Check if book is in wishlist
+                const isInWishlist = wishlist.some(item => item.id === book.id);
+                const heartClass = isInWishlist ? 'wishlist-active' : '';
+
+                // Highlight search terms in title and author
+                const highlightedTitle = highlightText(book.title, searchTerm);
+                const highlightedAuthor = highlightText(`by ${book.author}`, searchTerm);
+
+                box.innerHTML = `
+                    <div class="icons">
+                        <a href="#" class="fas fa-search"></a>
+                        <a href="#" class="fas fa-heart ${heartClass}" data-book-id="${book.id}"></a>
+                        <a href="#" class="fas fa-eye"></a>
+                    </div>
+                    <div class="image">
+                        <img src="${book.cover || 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" alt="${book.title}">
+                    </div>
+                    <div class="content">
+                        <div class="book-type-badge">${book.type}</div>
+                        <h3>${highlightedTitle}</h3>
+                        <p style="font-size: 1.4rem; color: #666; margin: 0.5rem 0;">${highlightedAuthor}</p>
+                        <div class="price">$${book.price || '15.99'} <span>$${book.oldPrice || '20.99'}</span></div>
+                        <button class="btn add-to-cart" data-book-id="${book.id}">add to cart</button>
+                    </div>
+                `;
+
+                container.appendChild(box);
+                
+                // Add event listeners for the buttons in this box
+                const addToCartBtn = box.querySelector('.add-to-cart');
+                const wishlistBtn = box.querySelector('.fa-heart');
+                
+                addToCartBtn.addEventListener('click', () => {
+                    addToCart(book);
+                });
+                
+                wishlistBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleWishlist(book, wishlistBtn);
+                });
+            });
+        }
+
+        // Load books when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            updateWishlistCount();
+            loadFeaturedBooks();
+            
+            // Add search functionality
+            const searchBox = document.getElementById('search-box');
+            const searchForm = document.getElementById('search-form');
+            
+            searchBox.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                if (searchTerm.length > 0) {
+                    performSearch(searchTerm);
+                } else {
+                    loadFeaturedBooks();
+                }
+            });
+            
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const searchTerm = searchBox.value.toLowerCase().trim();
+                performSearch(searchTerm);
+            });
+        });
+
+        // Auto-refresh when coming back from admin page
+        window.addEventListener('focus', function() {
+            allBooks = JSON.parse(localStorage.getItem('books')) || [];
+            const searchBox = document.getElementById('search-box');
+            const searchTerm = searchBox.value.toLowerCase().trim();
+            
+            if (searchTerm.length > 0) {
+                performSearch(searchTerm);
+            } else {
+                loadFeaturedBooks();
+            }
+        });
     </script>
-
-
-    
-
-
-
-
-
-
-    
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="script.js"></script>
 </body>
 </html>

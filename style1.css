@@ -537,3 +537,129 @@ body {
   padding: 1.3rem 1.5rem;
 }
  
+.featured .featured-slider .box .icons a:hover{
+  background:  rgb(99, 65, 4);
+  color: #fff;
+}
+
+.featured .featured-slider .box .content{
+  background: #fff;
+  padding: 1.5rem;
+}
+
+.featured .featured-slider .box .content h3{
+ font-size: 2rem;
+ color: black;
+}
+
+.featured .featured-slider .box .content .price{
+  font-size: 2.2rem;
+  color: black;
+  padding-top: 1rem;
+}
+
+.featured .featured-slider .box .content .price span{
+  font-size: 1.5rem;
+  color: var(--light-color);
+  text-decoration: line-through;
+}
+
+/* Featured Books Slider Dynamic Support */
+#featuredBooksContainer .box {
+    width: 25rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+    border: var(--border);
+    text-align: center;
+    background: #fff; /* ensures background even if book image is missing */
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, border 0.3s;
+}
+
+#featuredBooksContainer .box:hover {
+    border: var(--border-hover);
+    transform: translateY(-5px);
+}
+
+#featuredBooksContainer .box .image {
+    padding: 1rem;
+    background: linear-gradient(15deg, #eee 30%, #fff 30.1%);
+}
+
+#featuredBooksContainer .box .image img {
+    height: 25rem;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+#featuredBooksContainer .box:hover .image img {
+    transform: scale(1.05);
+}
+
+#featuredBooksContainer .box .icons {
+    border-bottom: var(--border-hover);
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    background: #fff;
+    z-index: 1;
+    transform: translateY(-100%);
+    transition: transform 0.3s;
+}
+
+#featuredBooksContainer .box:hover .icons {
+    transform: translateY(0%);
+}
+
+#featuredBooksContainer .box .icons a {
+    color: black;
+    font-size: 2.2rem;
+    padding: 1.3rem 1.5rem;
+}
+
+#featuredBooksContainer .box .icons a:hover {
+    background: rgb(99, 65, 4);
+    color: #fff;
+}
+
+#featuredBooksContainer .box .content {
+    background: #fff;
+    padding: 1.5rem;
+}
+
+#featuredBooksContainer .box .content h3 {
+    font-size: 2rem;
+    color: black;
+}
+
+#featuredBooksContainer .box .content .price {
+    font-size: 2.2rem;
+    color: black;
+    padding-top: 1rem;
+}
+
+#featuredBooksContainer .box .content .price span {
+    font-size: 1.5rem;
+    color: var(--light-color);
+    text-decoration: line-through;
+}
+
+#featuredBooksContainer .box .btn {
+    background: goldenrod;
+    color: #fff;
+    padding: 1rem 3rem;
+    border-radius: .5rem;
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+    transition: background 0.3s;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+#featuredBooksContainer .box .btn:hover {
+    background: rgb(99, 65, 4);
+}
