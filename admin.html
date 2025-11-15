@@ -561,34 +561,101 @@
     </div>
 
     <script>
-       // Permanent books database - This will be hardcoded into the script
-const permanentBooks = [
-  {
-    id: 1,
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald", 
-    type: "Fiction",
-    rating: 4.2,
-    stock: 12,
-    cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    price: 12.99,
-    oldPrice: 15.99
-  },
-  {
-    id: 2, 
-    title: "To Kill a Mockingbird",
-    author: "Harper Lee",
-    type: "Fiction", 
-    rating: 4.5,
-    stock: 8,
-    cover: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    price: 14.99,
-    oldPrice: 18.99
-  }
-];
+        // Admin access protection
+        document.addEventListener('DOMContentLoaded', function() {
+            const isAdmin = localStorage.getItem('isAdmin') === 'true';
+            const currentUser = localStorage.getItem('currentUser');
+            
+            if (!isAdmin || currentUser !== 'admin') {
+                alert('Access denied! Admin privileges required.');
+                window.location.href = 'index.html';
+                return;
+            }
+        });
 
-// Load books from localStorage or use permanent books
-let books = JSON.parse(localStorage.getItem('books')) || [...permanentBooks];
+        // Permanent books database
+        const permanentBooks = [
+            {
+                id: 1,
+                title: "A Way to Escape",
+                author: "Michelle Thompson", 
+                type: "Fiction",
+                rating: 4.2,
+                stock: 12,
+                cover: "https://d1btptoiso7inb.cloudfront.net/x7WK0jI1OguLXz-y1FISVtdFLkzRN_gmss17B_WxuGs/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDAvMTE0Lzg3NC83/MDE5MjA3MTMyY2Ux/NWIxLmpwZw",
+                price: 12.99,
+                oldPrice: 15.99
+            },
+            {
+                id: 2, 
+                title: "The Salt Loses Her Savour",
+                author: "Colleen Smith-Dennis",
+                type: "Fiction", 
+                rating: 4.5,
+                stock: 8,
+                cover: "https://d1btptoiso7inb.cloudfront.net/XJ7W0sO8Rn4wss2wtpZl7dFZXBnZO3SoHX5xmYZ87TE/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDAvMTE0LzI2NC8x/ZjhmNmE4OTNjYzI3/NzkxLmpwZw",
+                price: 14.99,
+                oldPrice: 18.99
+            },
+            {
+                id: 3, 
+                title: "Dinosaur Hide-and-Seek: A Prehistoric Search-and-Find Picture Book",
+                author: "Kikaseya Keitaro, Alex Latimer",
+                type: "Fiction", 
+                rating: 4.5,
+                stock: 8,
+                cover: "https://d1btptoiso7inb.cloudfront.net/kLEVFrPAJGmn0V4AX-1RwdyZOS6SWj66WvmJBDf97W8/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDYvOTU2LzMwOS9h/MTc5YTA1NDBiMzI1/ZWE3LmpwZw",
+                price: 14.99,
+                oldPrice: 18.99
+            },
+            {
+                id: 4, 
+                title: "AQA A Level Maths",
+                author: "Steve Cavill, David Baker",
+                type: "Fiction", 
+                rating: 4.5,
+                stock: 8,
+                cover: "https://d1btptoiso7inb.cloudfront.net/ZNZQPDif-Qhvye58WlJSrww27c-N9oTArP2S2x309kc/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDYvOTU2LzMwMi8x/ZjkwNmQyZTllMDBj/YzQxLmpwZw",
+                price: 14.99,
+                oldPrice: 18.99
+            },
+            {
+                id: 5, 
+                title: "C.L.R. James and the 21st Century Caribbean",
+                author: "Tennyson S.D. Joseph",
+                type: "History", 
+                rating: 4.5,
+                stock: 8,
+                cover: "https://d1btptoiso7inb.cloudfront.net/M3zZ3tzhPIq17MzQsq8SR2KwF_mHdN5IzvGxDSb34_M/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDUvMzc4LzAxNC81/YzA2NDM4MTgwODI4/MDhhLnBuZw",
+                price: 14.99,
+                oldPrice: 18.99
+            },
+            {
+                id: 6, 
+                title: "Colonial West Indian Students in Britain",
+                author: "Braithwaite, Lloyd",
+                type: "History", 
+                rating: 4.5,
+                stock: 8,
+                cover: "https://d1btptoiso7inb.cloudfront.net/J_lMEkW--3CrG-KKxL1UMHs3QO9NGKexRN6kbgThous/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDAvMTE4LzAwNC9i/NWY0NzViNmFiN2Y0/NmI1LmpwZw",
+                price: 14.99,
+                oldPrice: 18.99
+            },
+            {
+                id: 7, 
+                title: "Proslavery Priest",
+                author: "B. W. Higman",
+                type: "History", 
+                rating: 4.5,
+                stock: 8,
+                cover: "https://d1btptoiso7inb.cloudfront.net/iH1VS2IieS-KPtaaZ3l4gbOf9q2IPEvnNz9KZ3etwvI/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDAvMTE3Lzk2MC9j/NTNjNmJhODA5Njdi/OTc1LmpwZw",
+                price: 14.99,
+                oldPrice: 18.99
+            }
+        ];
+
+        // Always use the permanent books
+        let books = [...permanentBooks];
 
         const booksContainer = document.getElementById('books-container');
         const searchInput = document.getElementById('search-input');
@@ -604,25 +671,9 @@ let books = JSON.parse(localStorage.getItem('books')) || [...permanentBooks];
         const confirmationModal = document.getElementById('confirmation-modal');
         const okConfirmBtn = document.getElementById('ok-confirm-btn');
 
-       function saveBooks() { 
-  localStorage.setItem('books', JSON.stringify(books)); 
-  
-  // Generate the updated script code for permanent storage
-  generateUpdatedBookScript();
-}
-
-function generateUpdatedBookScript() {
-  // This function would generate the updated book data that you can copy-paste
-  // into your home.html file to make books permanent for all visitors
-  const bookScript = `const permanentBooks = ${JSON.stringify(books, null, 2)};\nlet allBooks = [...permanentBooks];`;
-  
-  console.log('=== COPY THIS TO home.html TO UPDATE PERMANENT BOOKS ===');
-  console.log(bookScript);
-  console.log('=== END OF SCRIPT TO COPY ===');
-  
-  // Optional: Show this in an alert or modal for easy copying
-  alert('Books saved! To make them permanent for all visitors, update the permanentBooks array in home.html with the generated script.');
-}
+        function saveBooks() { 
+            localStorage.setItem('books', JSON.stringify(books)); 
+        }
 
         function updateStats() {
             totalBooksEl.textContent = books.length;

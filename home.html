@@ -50,15 +50,18 @@
         }
 
         /* ✅ HEADER BAR */
-        .header .header-1 {
-            background: #fff;
-            padding: 1.5rem 3%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            box-sizing: border-box;
-        }
+       .header .header-1 {
+    background: #fff;
+    padding: 1.5rem 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 70px; /* Fixed minimum height */
+    overflow: visible;
+}
 
         .header .header-1 .logo {
             font-size: 3.5rem;
@@ -105,6 +108,13 @@
         }
 
         /* ✅ Header icons */
+        .header .header-1 .icons {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 50px;
+    flex-shrink: 0;
+}
         .header .header-1 .icons div,
         .header .header-1 .icons a  {
             font-size: 2.8rem;
@@ -192,54 +202,23 @@
              color: goldenrod;
         }
 
-        /* ✅ User Menu Dropdown */
-        .user-menu {
-            position: relative;
-            display: inline-block;
-        }
+/* ✅ User Menu - Simplified for direct logout */
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
 
-        .user-icon {
-            margin-left: 1.5rem;
-            font-size: 2.5rem;
-            color: rgb(99, 65, 4);
-            cursor: pointer;
-        }
-        .user-icon:hover {
-            color: goldenrod;
-        }
-        .user-dropdown {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 3.5rem;
-            background: #fff;
-            color: rgb(99, 65, 4);
-            border-radius: 0.5rem;
-            box-shadow: var(--box-shadow);
-            width: 16rem;
-            padding: 1rem;
-            text-align: center;
-            z-index: 100;
-        }
-        .user-dropdown.active {
-            display: block;
-        }
-        .user-dropdown p {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-        }
-        .user-dropdown button {
-            padding: 0.5rem 1rem;
-            font-size: 1.4rem;
-            color: #fff;
-            background: rgb(99, 65, 4);
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-        }
-        .user-dropdown button:hover {
-            background: goldenrod;
-        }
+.user-icon {
+    margin-left: 1.5rem;
+    font-size: 2.5rem;
+    color: rgb(99, 65, 4);
+    cursor: pointer;
+}
+.user-icon:hover {
+    color: goldenrod;
+}
+
+/* Removed dropdown styles since we don't need them anymore */
 
         body {
           height: 250px;
@@ -460,6 +439,25 @@
             gap: 2rem;
             padding: 2rem 0;
         }
+
+        header .logo img {
+    height: 50px; /* or whatever size you want */
+    width: auto;
+    display: block;
+}
+
+header .logo a {
+    display: flex;
+    align-items: center;
+    height: 100%;     /* prevent movement */
+}
+
+header .logo a:focus,
+header .logo a:active {
+    outline: none;
+    border: none;
+}
+
 
         .icons-container .icons {
             display: flex;
@@ -785,13 +783,9 @@
                     <span class="cart-badge" id="cart-count">0</span>
                 </a>
 
-                <!-- User Menu -->
+                <!-- User Menu - Simplified for direct logout -->
                 <div class="user-menu">
-                    <div class="user-icon"><i class="fas fa-user"></i></div>
-                    <div class="user-dropdown">
-                        <p id="usernameDisplay">Welcome, Guest</p>
-                        <button id="logoutBtn">Logout</button>
-                    </div>
+                    <div class="user-icon" id="logoutIcon"><i class="fas fa-user"></i></div>
                 </div>
             </div>
         </div>
@@ -880,26 +874,87 @@
 const permanentBooks = [
   {
     id: 1,
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald", 
+    title: "A Way to Escape",
+    author: "Michelle Thompson", 
     type: "Fiction",
     rating: 4.2,
     stock: 12,
-    cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    cover: "https://d1btptoiso7inb.cloudfront.net/x7WK0jI1OguLXz-y1FISVtdFLkzRN_gmss17B_WxuGs/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDAvMTE0Lzg3NC83/MDE5MjA3MTMyY2Ux/NWIxLmpwZw",
     price: 12.99,
     oldPrice: 15.99
   },
   {
     id: 2, 
-    title: "To Kill a Mockingbird",
-    author: "Harper Lee",
+    title: "The Salt Loses Her Savour",
+    author: "Colleen Smith-Dennis",
     type: "Fiction", 
     rating: 4.5,
     stock: 8,
-    cover: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    cover: "https://d1btptoiso7inb.cloudfront.net/XJ7W0sO8Rn4wss2wtpZl7dFZXBnZO3SoHX5xmYZ87TE/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDAvMTE0LzI2NC8x/ZjhmNmE4OTNjYzI3/NzkxLmpwZw",
     price: 14.99,
     oldPrice: 18.99
-  }
+  },
+   {
+    id: 3, 
+    title: "Dinosaur Hide-and-Seek: A Prehistoric Search-and-Find Picture Book",
+    author: "Kikaseya Keitaro, Alex Latimer",
+    type: "Fiction", 
+    rating: 4.5,
+    stock: 8,
+    cover: "https://d1btptoiso7inb.cloudfront.net/kLEVFrPAJGmn0V4AX-1RwdyZOS6SWj66WvmJBDf97W8/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDYvOTU2LzMwOS9h/MTc5YTA1NDBiMzI1/ZWE3LmpwZw",
+    price: 14.99,
+    oldPrice: 18.99
+  },
+
+   {
+    id: 4, 
+    title: "AQA A Level Maths",
+    author: "Steve Cavill, David Baker",
+    type: "Fiction", 
+    rating: 4.5,
+    stock: 8,
+    cover: "https://d1btptoiso7inb.cloudfront.net/ZNZQPDif-Qhvye58WlJSrww27c-N9oTArP2S2x309kc/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDYvOTU2LzMwMi8x/ZjkwNmQyZTllMDBj/YzQxLmpwZw",
+    price: 14.99,
+    oldPrice: 18.99
+  },
+
+  {
+    id: 5, 
+    title: "C.L.R. James and the 21st Century Caribbean",
+    author: "Tennyson S.D. Joseph",
+    type: "History", 
+    rating: 4.5,
+    stock: 8,
+    cover: "https://d1btptoiso7inb.cloudfront.net/M3zZ3tzhPIq17MzQsq8SR2KwF_mHdN5IzvGxDSb34_M/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDUvMzc4LzAxNC81/YzA2NDM4MTgwODI4/MDhhLnBuZw",
+    price: 14.99,
+    oldPrice: 18.99
+  },
+
+  {
+    id: 6, 
+    title: "Colonial West Indian Students in Britain",
+    author: "Braithwaite, Lloyd",
+    type: "History", 
+    rating: 4.5,
+    stock: 8,
+    cover: "https://d1btptoiso7inb.cloudfront.net/J_lMEkW--3CrG-KKxL1UMHs3QO9NGKexRN6kbgThous/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDAvMTE4LzAwNC9i/NWY0NzViNmFiN2Y0/NmI1LmpwZw",
+    price: 14.99,
+    oldPrice: 18.99
+  },
+
+  {
+    id: 7, 
+    title: "Proslavery Priest",
+    author: "B. W. Higman",
+    type: "History", 
+    rating: 4.5,
+    stock: 8,
+    cover: "https://d1btptoiso7inb.cloudfront.net/iH1VS2IieS-KPtaaZ3l4gbOf9q2IPEvnNz9KZ3etwvI/s:540:776/aHR0cHM6Ly9ib29r/ZnVzaW9uLnMzLmFt/YXpvbmF3cy5jb20v/Ym9vay9jb3Zlci8w/MDAvMTE3Lzk2MC9j/NTNjNmJhODA5Njdi/OTc1LmpwZw",
+    price: 14.99,
+    oldPrice: 18.99
+  },
+
+ 
 ];
 
 // Always show permanent books + any admin-added books from localStorage
@@ -914,14 +969,7 @@ adminBooks.forEach(adminBook => {
 });
         // === Retrieve logged-in username ===
         const usernameDisplay = document.getElementById('usernameDisplay');
-        const logoutBtn = document.getElementById('logoutBtn');
         const storedUsername = localStorage.getItem('rememberedUsername') || localStorage.getItem('regUsername');
-
-        if (storedUsername) {
-            usernameDisplay.textContent = `Welcome, ${storedUsername}`;
-        } else {
-            usernameDisplay.textContent = "Welcome, Guest";
-        }
 
         // Admin link visibility control
         const adminLink = document.getElementById('adminLink');
@@ -929,18 +977,22 @@ adminBooks.forEach(adminBook => {
           adminLink.style.display = 'block';
         }
 
-        logoutBtn.addEventListener('click', () => {
-          localStorage.removeItem('rememberedUsername');
-          localStorage.removeItem('regUsername');
-          localStorage.removeItem('currentUser');
-          localStorage.removeItem('isAdmin');
-          window.location.href = 'index.html';
-        });
-
-        const userIcon = document.querySelector('.user-icon');
-        const userDropdown = document.querySelector('.user-dropdown');
-        userIcon.addEventListener('click', () => {
-            userDropdown.classList.toggle('active');
+        // Direct logout when clicking user icon
+        const logoutIcon = document.getElementById('logoutIcon');
+        logoutIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Show confirmation dialog
+            if (confirm('Are you sure you want to log out?')) {
+                // Clear user data from localStorage
+                localStorage.removeItem('rememberedUsername');
+                localStorage.removeItem('regUsername');
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('isAdmin');
+                
+                // Redirect to login page
+                window.location.href = 'index.html';
+            }
         });
 
         // Update cart and wishlist counts
