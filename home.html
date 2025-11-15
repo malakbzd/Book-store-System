@@ -575,7 +575,7 @@ header .logo a:active {
 
         .featured .featured-slider .box .icons a{
           color: black;
-          font-size: 0.2rem;
+          font-size: 2.2rem;
           padding: 1.3rem 1.5rem;
         }
          
@@ -1116,9 +1116,8 @@ adminBooks.forEach(adminBook => {
 
             box.innerHTML = `
               <div class="icons">
-                <a href="#" class="fas fa-search"></a>
+                <!-- Only keeping the heart icon for wishlist -->
                 <a href="#" class="fas fa-heart ${heartClass}" data-book-id="${book.id}"></a>
-                <a href="#" class="fas fa-eye"></a>
               </div>
               <div class="image">
                 <img src="${book.cover || 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" alt="${book.title}">
