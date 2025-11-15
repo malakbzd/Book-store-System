@@ -31,42 +31,50 @@
             background-color: var(--cream);
             color: var(--text-dark);
             line-height: 1.6;
+            font-size: 62.5%;
         }
 
+        /* Header - Mobile Responsive */
         header {
             background: linear-gradient(135deg, var(--primary-brown), var(--dark-brown));
             color: white;
-            padding: 1rem 2rem;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.8rem;
+            font-size: clamp(1.6rem, 4vw, 1.8rem);
             font-weight: bold;
         }
 
         .logo i {
-            font-size: 2rem;
+            font-size: clamp(1.8rem, 4vw, 2rem);
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: clamp(1rem, 2vw, 2rem);
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 0.8rem clamp(0.8rem, 2vw, 1.6rem);
             border-radius: 4px;
             transition: background-color 0.3s;
+            font-size: clamp(1.4rem, 3vw, 1.6rem);
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
@@ -76,7 +84,7 @@
         .container {
             max-width: 1200px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 0 5%;
         }
 
         .wishlist-header {
@@ -85,21 +93,28 @@
         }
 
         .wishlist-header h1 {
-            font-size: 3rem;
+            font-size: clamp(2.4rem, 6vw, 3rem);
             color: var(--dark-brown);
             margin-bottom: 1rem;
         }
 
         .wishlist-header p {
-            font-size: 1.6rem;
+            font-size: clamp(1.4rem, 3vw, 1.6rem);
             color: var(--light-brown);
         }
 
         .wishlist-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+        }
+
+        @media (max-width: 480px) {
+            .wishlist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
         }
 
         .wishlist-item {
@@ -118,29 +133,30 @@
 
         .wishlist-item-image {
             width: 100%;
-            height: 200px;
+            height: clamp(180px, 40vw, 200px);
             object-fit: cover;
             border-bottom: 1px solid #eee;
         }
 
         .wishlist-item-content {
-            padding: 1.5rem;
+            padding: clamp(1.2rem, 3vw, 1.5rem);
         }
 
         .wishlist-item-title {
-            font-size: 1.8rem;
+            font-size: clamp(1.6rem, 4vw, 1.8rem);
             color: var(--dark-brown);
             margin-bottom: 0.5rem;
+            line-height: 1.3;
         }
 
         .wishlist-item-author {
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
             color: var(--light-brown);
             margin-bottom: 1rem;
         }
 
         .wishlist-item-price {
-            font-size: 1.8rem;
+            font-size: clamp(1.6rem, 4vw, 1.8rem);
             color: var(--primary-brown);
             font-weight: bold;
             margin-bottom: 1.5rem;
@@ -150,6 +166,12 @@
             display: flex;
             gap: 1rem;
             justify-content: space-between;
+        }
+
+        @media (max-width: 480px) {
+            .wishlist-item-actions {
+                flex-direction: column;
+            }
         }
 
         .btn {
@@ -163,7 +185,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
             text-decoration: none;
         }
 
@@ -196,19 +218,19 @@
         }
 
         .empty-wishlist i {
-            font-size: 6rem;
+            font-size: clamp(4rem, 10vw, 6rem);
             color: var(--light-brown);
             margin-bottom: 2rem;
         }
 
         .empty-wishlist h3 {
-            font-size: 2.4rem;
+            font-size: clamp(2rem, 5vw, 2.4rem);
             color: var(--dark-brown);
             margin-bottom: 1rem;
         }
 
         .empty-wishlist p {
-            font-size: 1.6rem;
+            font-size: clamp(1.4rem, 3vw, 1.6rem);
             color: var(--light-brown);
             margin-bottom: 2rem;
         }
@@ -219,7 +241,7 @@
             text-decoration: none;
             padding: 1rem 2rem;
             border-radius: 30px;
-            font-size: 1.6rem;
+            font-size: clamp(1.4rem, 3vw, 1.6rem);
             transition: all 0.3s;
             display: inline-block;
         }
@@ -235,6 +257,7 @@
             text-align: center;
             padding: 1.5rem;
             margin-top: 3rem;
+            font-size: clamp(1.4rem, 3vw, 1.6rem);
         }
 
         /* Toast notification */
@@ -253,6 +276,9 @@
             transition: all 0.3s ease;
             font-family: Arial, sans-serif;
             font-size: 1.4rem;
+            max-width: 90%;
+            left: 5%;
+            right: 5%;
         }
         
         .toast.show {
@@ -260,17 +286,45 @@
             opacity: 1;
         }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 2.2rem;
+            color: white;
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
-            .wishlist-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            .menu-toggle {
+                display: block;
             }
             
-            .wishlist-item-actions {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--dark-brown);
+                z-index: 1000;
+                padding: 1rem 0;
                 flex-direction: column;
+                gap: 0;
             }
             
-            .btn {
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
                 width: 100%;
+            }
+            
+            nav a {
+                display: block;
+                padding: 1.5rem;
+                text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
             }
         }
     </style>
@@ -278,8 +332,14 @@
 <body>
     <header>
         <div class="logo"><i class="fas fa-book"></i> <span>Bookaholic</span></div>
+        
+        <!-- Mobile Menu Toggle -->
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        
         <nav>
-            <ul>
+            <ul id="navMenu">
                 <li><a href="home.html">Home</a></li>
                 <li><a href="home.html#featured">Featured</a></li>
                 <li><a href="#" class="active">Wishlist</a></li>
@@ -301,13 +361,30 @@
     </div>
 
     <footer>
-        <p>&copy; 2023 Bookaholic. All rights reserved.</p>
+        <p>&copy; 2024 Bookaholic. All rights reserved.</p>
     </footer>
 
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
 
     <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+        }
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
         let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
