@@ -798,13 +798,12 @@
 
         <div class="header-2">
             <nav class="navbar">
-                <a href="#home">home</a>
-                <a href="#featured">featured</a>
-                <!-- REMOVED ARRIVALS LINK -->
-                <a href="wishlist.html">Wishlist</a>
-                <a href="cart.html">Cart</a>
-                <a href="admin.html">Admin Panel</a>
-            </nav>
+  <a href="#home">home</a>
+  <a href="#featured">featured</a>
+  <a href="wishlist.html">Wishlist</a>
+  <a href="cart.html">Cart</a>
+  <a href="admin.html" id="adminLink" style="display: none;">Admin Panel</a>
+</nav>
         </div>
     </header>
 
@@ -872,11 +871,47 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
 
-    <script>
+      <script>
         // === Cart and Wishlist Management ===
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        let allBooks = JSON.parse(localStorage.getItem('books')) || [];
+        
+        // Permanent books initialization - COMPATIBLE WITH ADMIN
+        function initializePermanentBooks() {
+          let books = JSON.parse(localStorage.getItem('books')) || [];
+          
+          if (books.length === 0) {
+            books = [
+              {
+                id: 1,
+                title: "The Great Gatsby",
+                author: "F. Scott Fitzgerald", 
+                type: "Fiction",
+                rating: 4.2,
+                stock: 12,
+                cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                price: 12.99,
+                oldPrice: 15.99
+              },
+              {
+                id: 2, 
+                title: "To Kill a Mockingbird",
+                author: "Harper Lee",
+                type: "Fiction", 
+                rating: 4.5,
+                stock: 8,
+                cover: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                price: 14.99,
+                oldPrice: 18.99
+              }
+            ];
+            localStorage.setItem('books', JSON.stringify(books));
+          }
+          
+          return books;
+        }
+
+        let allBooks = initializePermanentBooks();
         
         // === Retrieve logged-in username ===
         const usernameDisplay = document.getElementById('usernameDisplay');
@@ -889,10 +924,18 @@
             usernameDisplay.textContent = "Welcome, Guest";
         }
 
+        // Admin link visibility control
+        const adminLink = document.getElementById('adminLink');
+        if (adminLink && localStorage.getItem('isAdmin') === 'true' && localStorage.getItem('currentUser') === 'admin') {
+          adminLink.style.display = 'block';
+        }
+
         logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('rememberedUsername');
-            localStorage.removeItem('regUsername');
-            window.location.href = 'index.html';
+          localStorage.removeItem('rememberedUsername');
+          localStorage.removeItem('regUsername');
+          localStorage.removeItem('currentUser');
+          localStorage.removeItem('isAdmin');
+          window.location.href = 'index.html';
         });
 
         const userIcon = document.querySelector('.user-icon');
@@ -986,69 +1029,73 @@
             return text.replace(regex, '<span class="search-highlight">$1</span>');
         }
 
-        // ✅ Dynamically Load Featured Books
+        // ✅ Dynamically Load Featured Books - COMPATIBLE WITH ADMIN
         function loadFeaturedBooks(booksToShow = null, searchTerm = '') {
-            let books = booksToShow || allBooks;
-            let container = document.getElementById("featuredBooksContainer");
-            container.innerHTML = ''; // Clear existing content
+          let books = booksToShow || allBooks;
+          let container = document.getElementById("featuredBooksContainer");
+          container.innerHTML = ''; // Clear existing content
 
-            if (books.length === 0) {
-                const noResultsMessage = searchTerm ? 
-                    `<p style="text-align: center; font-size: 2rem; color: #666; padding: 2rem; grid-column: 1/-1;">
-                        No books found for "${searchTerm}". Try a different search term.
-                    </p>` :
-                    `<p style="text-align: center; font-size: 2rem; color: #666; padding: 2rem; grid-column: 1/-1;">
-                        No books available. Add some books in the admin panel!
-                    </p>`;
-                container.innerHTML = noResultsMessage;
-                return;
-            }
+          if (books.length === 0) {
+            const noResultsMessage = searchTerm ? 
+              `<p style="text-align: center; font-size: 2rem; color: #666; padding: 2rem; grid-column: 1/-1;">
+                No books found for "${searchTerm}". Try a different search term.
+              </p>` :
+              `<p style="text-align: center; font-size: 2rem; color: #666; padding: 2rem; grid-column: 1/-1;">
+                No books available. Add some books in the admin panel!
+              </p>`;
+            container.innerHTML = noResultsMessage;
+            return;
+          }
 
-            books.forEach(book => {
-                let box = document.createElement("div");
-                box.className = "box";
-                
-                // Check if book is in wishlist
-                const isInWishlist = wishlist.some(item => item.id === book.id);
-                const heartClass = isInWishlist ? 'wishlist-active' : '';
+          books.forEach(book => {
+            let box = document.createElement("div");
+            box.className = "box";
+            
+            // Check if book is in wishlist
+            const isInWishlist = wishlist.some(item => item.id === book.id);
+            const heartClass = isInWishlist ? 'wishlist-active' : '';
 
-                // Highlight search terms in title and author
-                const highlightedTitle = highlightText(book.title, searchTerm);
-                const highlightedAuthor = highlightText(`by ${book.author}`, searchTerm);
+            // Highlight search terms in title and author
+            const highlightedTitle = highlightText(book.title, searchTerm);
+            const highlightedAuthor = highlightText(`by ${book.author}`, searchTerm);
 
-                box.innerHTML = `
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart ${heartClass}" data-book-id="${book.id}"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="${book.cover || 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" alt="${book.title}">
-                    </div>
-                    <div class="content">
-                        <div class="book-type-badge">${book.type}</div>
-                        <h3>${highlightedTitle}</h3>
-                        <p style="font-size: 1.4rem; color: #666; margin: 0.5rem 0;">${highlightedAuthor}</p>
-                        <div class="price">$${book.price || '15.99'} <span>$${book.oldPrice || '20.99'}</span></div>
-                        <button class="btn add-to-cart" data-book-id="${book.id}">add to cart</button>
-                    </div>
-                `;
+            // Use proper fallbacks for price fields
+            const displayPrice = book.price || '15.99';
+            const displayOldPrice = book.oldPrice || '20.99';
 
-                container.appendChild(box);
-                
-                // Add event listeners for the buttons in this box
-                const addToCartBtn = box.querySelector('.add-to-cart');
-                const wishlistBtn = box.querySelector('.fa-heart');
-                
-                addToCartBtn.addEventListener('click', () => {
-                    addToCart(book);
-                });
-                
-                wishlistBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    toggleWishlist(book, wishlistBtn);
-                });
+            box.innerHTML = `
+              <div class="icons">
+                <a href="#" class="fas fa-search"></a>
+                <a href="#" class="fas fa-heart ${heartClass}" data-book-id="${book.id}"></a>
+                <a href="#" class="fas fa-eye"></a>
+              </div>
+              <div class="image">
+                <img src="${book.cover || 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" alt="${book.title}">
+              </div>
+              <div class="content">
+                <div class="book-type-badge">${book.type}</div>
+                <h3>${highlightedTitle}</h3>
+                <p style="font-size: 1.4rem; color: #666; margin: 0.5rem 0;">${highlightedAuthor}</p>
+                <div class="price">$${displayPrice} <span>$${displayOldPrice}</span></div>
+                <button class="btn add-to-cart" data-book-id="${book.id}">add to cart</button>
+              </div>
+            `;
+
+            container.appendChild(box);
+            
+            // Add event listeners for the buttons in this box
+            const addToCartBtn = box.querySelector('.add-to-cart');
+            const wishlistBtn = box.querySelector('.fa-heart');
+            
+            addToCartBtn.addEventListener('click', () => {
+                addToCart(book);
             });
+            
+            wishlistBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleWishlist(book, wishlistBtn);
+            });
+          });
         }
 
         // Load books when page loads
@@ -1079,15 +1126,24 @@
 
         // Auto-refresh when coming back from admin page
         window.addEventListener('focus', function() {
-            allBooks = JSON.parse(localStorage.getItem('books')) || [];
-            const searchBox = document.getElementById('search-box');
-            const searchTerm = searchBox.value.toLowerCase().trim();
-            
-            if (searchTerm.length > 0) {
-                performSearch(searchTerm);
-            } else {
-                loadFeaturedBooks();
-            }
+          // Reload books from localStorage to get admin updates
+          allBooks = JSON.parse(localStorage.getItem('books')) || initializePermanentBooks();
+          const searchBox = document.getElementById('search-box');
+          const searchTerm = searchBox.value.toLowerCase().trim();
+          
+          if (searchTerm.length > 0) {
+            performSearch(searchTerm);
+          } else {
+            loadFeaturedBooks();
+          }
+        });
+
+        // Also refresh when page becomes visible
+        document.addEventListener('visibilitychange', function() {
+          if (!document.hidden) {
+            allBooks = JSON.parse(localStorage.getItem('books')) || initializePermanentBooks();
+            loadFeaturedBooks();
+          }
         });
     </script>
 </body>

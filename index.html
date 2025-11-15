@@ -111,46 +111,55 @@
       }
     };
 
-    // --- LOGIN LOGIC ---
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+  // --- LOGIN LOGIC ---
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-      const username = loginUsername.value.trim();
-      const password = loginPassword.value.trim();
+  const username = loginUsername.value.trim();
+  const password = loginPassword.value.trim();
 
-      if (username === "" || password === "") {
-        alert("Please fill in both username and password.");
-        return;
-      }
+  if (username === "" || password === "") {
+    alert("Please fill in both username and password.");
+    return;
+  }
 
-      // ✅ ADMIN LOGIN CHECK
-      if (username === "admin" && password === "12345") {
-        alert("Welcome, Admin!");
-        window.location.href = "admin.html";
-        return;
-      }
+  // ✅ ADMIN LOGIN CHECK - Only admin can access admin panel
+  if (username === "admin" && password === "12345") {
+    alert("Welcome, Admin!");
+    
+    // Save admin session
+    localStorage.setItem("isAdmin", "true");
+    localStorage.setItem("currentUser", "admin");
+    
+    // Redirect to admin panel
+    window.location.href = "admin.html";
+    return;
+  }
 
-      // ✅ USER LOGIN CHECK
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      const user = users.find(
-        (u) => u.username === username && u.password === password
-      );
+  // ✅ USER LOGIN CHECK - Regular users cannot access admin
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const user = users.find(
+    (u) => u.username === username && u.password === password
+  );
 
-      if (!user) {
-        alert("Invalid username or password. Please register first.");
-        return;
-      }
+  if (!user) {
+    alert("Invalid username or password. Please register first.");
+    return;
+  }
 
-      // ✅ Save remembered username
-      if (rememberMe.checked) {
-        localStorage.setItem("rememberedUsername", username);
-      } else {
-        localStorage.removeItem("rememberedUsername");
-      }
+  // ✅ Save remembered username and user session
+  if (rememberMe.checked) {
+    localStorage.setItem("rememberedUsername", username);
+  } else {
+    localStorage.removeItem("rememberedUsername");
+  }
+  
+  localStorage.setItem("currentUser", username);
+  localStorage.setItem("isAdmin", "false");
 
-      alert(`Welcome back, ${username}! Redirecting...`);
-      window.location.href = "home.html";
-    });
+  alert(`Welcome back, ${username}! Redirecting...`);
+  window.location.href = "home.html";
+});
 
     // --- REGISTER LOGIC ---
     registerForm.addEventListener("submit", (e) => {
