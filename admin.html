@@ -561,31 +561,34 @@
     </div>
 
     <script>
-        // Use consistent data structure and localStorage key
-        let books = JSON.parse(localStorage.getItem('books')) || [
-            {
-                id: 1,
-                title: "The Great Gatsby",
-                author: "F. Scott Fitzgerald", 
-                type: "Fiction",
-                rating: 4.2,
-                stock: 12,
-                cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                price: 12.99,
-                oldPrice: 15.99
-            },
-            {
-                id: 2, 
-                title: "To Kill a Mockingbird",
-                author: "Harper Lee",
-                type: "Fiction", 
-                rating: 4.5,
-                stock: 8,
-                cover: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                price: 14.99,
-                oldPrice: 18.99
-            }
-        ];
+       // Permanent books database - This will be hardcoded into the script
+const permanentBooks = [
+  {
+    id: 1,
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald", 
+    type: "Fiction",
+    rating: 4.2,
+    stock: 12,
+    cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    price: 12.99,
+    oldPrice: 15.99
+  },
+  {
+    id: 2, 
+    title: "To Kill a Mockingbird",
+    author: "Harper Lee",
+    type: "Fiction", 
+    rating: 4.5,
+    stock: 8,
+    cover: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    price: 14.99,
+    oldPrice: 18.99
+  }
+];
+
+// Load books from localStorage or use permanent books
+let books = JSON.parse(localStorage.getItem('books')) || [...permanentBooks];
 
         const booksContainer = document.getElementById('books-container');
         const searchInput = document.getElementById('search-input');
@@ -601,9 +604,25 @@
         const confirmationModal = document.getElementById('confirmation-modal');
         const okConfirmBtn = document.getElementById('ok-confirm-btn');
 
-        function saveBooks() { 
-            localStorage.setItem('books', JSON.stringify(books)); 
-        }
+       function saveBooks() { 
+  localStorage.setItem('books', JSON.stringify(books)); 
+  
+  // Generate the updated script code for permanent storage
+  generateUpdatedBookScript();
+}
+
+function generateUpdatedBookScript() {
+  // This function would generate the updated book data that you can copy-paste
+  // into your home.html file to make books permanent for all visitors
+  const bookScript = `const permanentBooks = ${JSON.stringify(books, null, 2)};\nlet allBooks = [...permanentBooks];`;
+  
+  console.log('=== COPY THIS TO home.html TO UPDATE PERMANENT BOOKS ===');
+  console.log(bookScript);
+  console.log('=== END OF SCRIPT TO COPY ===');
+  
+  // Optional: Show this in an alert or modal for easy copying
+  alert('Books saved! To make them permanent for all visitors, update the permanentBooks array in home.html with the generated script.');
+}
 
         function updateStats() {
             totalBooksEl.textContent = books.length;
